@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <title>
+            using Lists
+        </title>
+         <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style></head>
+
+
+
+<body>
+    <h2>Sowmya Yalamarthi builds a list</h2>
+    <input id="inpList" type="text"></input>
+		<div class="flex-container" id="target">
+		  <div class="listy">item 1</div>   
+		  <div class="listy">item 2</div>  
+		  <div class="listy">item 3</div>  
+		</div>
+	
+	<p> Press the button to create an new element of type div and then add it to the container.
+		</p>
+		<button onclick="makeNewDiv()">Add one</button>
+	
+	
+</body>
+<script>
+	function makeNewDiv(){
+		/* make the div and its text */
+		let element = document.createElement("div")
+		element.innerHTML = document.getElementById("inpList").value
+		element.className="listy"
+
+		/* add it to the container */
+		var listyItems=document.getElementsByClassName("listy")
+        var check=0;
+        if(listyItems.length>9)
+        {
+            for(let item of listyItems)
+            {
+                console.log(item.innerHTML)
+                if(item.innerHTML==document.getElementsById("inpList").value)
+                {
+                    item.remove();
+                    console.log("We are getting rid of duplicates.");
+                    check=1;
+                    break;
+                }
+            }
+            if(check==0)
+            {
+                var removeItem=getRandomIntInclusive(0,9);
+                console.log(removeItem);
+                listyItems[removeItem].remove();
+                console.log("We get rid of the "+ removeItem+" item.");
+
+            }
+        }
+        document.getElementById('target').appendChild(element)
+		
+	}
+    function getRandomIntInclusive(min,max)
+         {
+             min=Math.ceil(min);
+             max=Math.floor(max);
+             return Math.floor(Math.random()*(max-min+1)+min);
+
+         }
+
+</script>
+</html>	
